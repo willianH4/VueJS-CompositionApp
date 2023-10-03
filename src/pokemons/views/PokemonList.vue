@@ -9,14 +9,16 @@
 </template>
 
 <script lang="ts" setup>
-import { usePokemons } from '../composables/usePokemons';
+import { useQuery } from '@tanstack/vue-query';
+import { getPokemons } from '../helpers/get-pokemons';
+import { computed } from 'vue';
 
-    // const data = await getPokemons();
-    // const pokemons = ref<Pokemon[]>(data);
+    const { isLoading, data:pokemons } = useQuery(
+        ['pokemons'],
+        getPokemons
+    );
 
-    // getPokemons().then( (data) => pokemons.value = data );
-
-    const { count, pokemons, isLoading } = usePokemons();
+    const count = computed(() => pokemons.value?.length ?? 0);
 </script>
 
 <style scoped>
