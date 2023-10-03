@@ -1,6 +1,12 @@
 <template>
     <NavBar :links="routeLinks" is-secondary/>
-    <RouterView />
+    <Suspense>
+        <RouterView />
+        <template #fallback>
+            Loading...
+        </template>
+    </Suspense>
+    
 </template>
 
 <script lang="ts" setup>
