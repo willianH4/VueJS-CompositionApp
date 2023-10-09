@@ -1,10 +1,13 @@
 import axios from "axios";
 import pokemonApi from "../api/pokemonApi";
 import type { Pokemon, PokemonListResponse, PokemonResponse } from "../interfaces"
+import { sleep } from "./sleep";
 
 export const getPokemons = async (): Promise<Pokemon[]> => {
     
     // throw Error('Error en la prueba');
+
+    await sleep(4);
 
     const { data } = await pokemonApi.get<PokemonListResponse>('/pokemon?limit=20');
 
