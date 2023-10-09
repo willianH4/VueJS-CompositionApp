@@ -8,12 +8,13 @@
         <!-- <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink :to="{ name: 'counter' }">Counter</RouterLink> -->
-        <RouterLink v-for="(item, index) in $props.links" :key="index" :to="item.path">{{ item.title }}</RouterLink>
+        <RouterLink v-for="(item, index) in links" :key="index" :to="item.path">{{ item.title }}</RouterLink>
     </nav>
 </template>
 
 <script lang="ts" setup>
 import type { RouterLink } from '@/router/list-routes';
+import { computed } from 'vue';
 
     interface Props {
         title?: string;
@@ -21,10 +22,16 @@ import type { RouterLink } from '@/router/list-routes';
         isSecondary?: boolean,
     }
 
-    withDefaults(defineProps<Props>(), {
+  const props = withDefaults(defineProps<Props>(), {
         title: 'CompoApp',
         isSecondary: false,
     });
+
+    // forma 1
+    // const links = toRef(props, 'links');
+
+    // forma2
+    const links = computed(() => props.links.filter(link => link.visible));
 </script>
 
 <style scoped>

@@ -9,25 +9,25 @@ export const pokemonRoute: RouteRecordRaw = {
     children: [
         {
             path: `/${ ROUTE_NAME }/by/:id`,
-            props: { title: 'Pokemon por ID' },
+            props: { title: 'Pokemon por ID', visible: false },
             name: 'pokemon-id',
             component: () => import('@/pokemons/views/PokemonById.vue'),
         },
         {
             path: `/${ ROUTE_NAME }/list`,
-            props: { title: 'Listado' },
+            props: { title: 'Listado', visible: true },
             name: 'pokemon-list',
             component: () => import('@/pokemons/views/PokemonList.vue'),
         },
         {
             path: `/${ ROUTE_NAME }/list-native`,
-            props: { title: 'Listado nativo' },
+            props: { title: 'Listado nativo', visible: true },
             name: 'pokemon-list-native',
             component: () => import('@/pokemons/views/PokemonListStoreNative.vue'),
         },
         {
             path: `/${ ROUTE_NAME }/search`,
-            props: { title: 'Busqueda' },
+            props: { title: 'Busqueda', visible: true },
             name: 'pokemon-search',
             component: () => import('@/pokemons/views/PokemonSearch.vue'),
         }
