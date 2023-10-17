@@ -1,7 +1,7 @@
 <template>
     <nav>
         <template v-if="!$props.isSecondary">
-          <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="25" height="25" />
+          <IconPinia/>
           <span>{{ $props.title }}</span>
         </template>
 
@@ -15,6 +15,7 @@
 <script lang="ts" setup>
 import type { RouterLink } from '@/router/list-routes';
 import { computed } from 'vue';
+import IconPinia from './icons/IconPinia.vue';
 
     interface Props {
         title?: string;
