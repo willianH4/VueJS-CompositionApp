@@ -1,12 +1,12 @@
 <template>
 <div>
     <ul>
-        <li>
+        <li v-for="client in clients" :key="client.id">
             <RouterLink :to="{
                 name: 'client-id',
-                params: { id: 1 }
+                params: { id: client.id }
             }">
-                Client Name
+                {{ client.name }}
             </RouterLink>
         </li>
     </ul>
@@ -14,6 +14,10 @@
 </template>
 
 <script lang="ts" setup>
+import useClients from '@/clients/composables/useClients'
+
+const { clients } = useClients();
+
 </script>
 
 <style scoped>
