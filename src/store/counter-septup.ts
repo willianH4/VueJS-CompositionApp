@@ -11,6 +11,8 @@ export const useCounterSeptupStore = defineStore('counterSetup', () => {
         lastChange.value = new Date();
     }
 
+    // implement function reset store
+
     return {
         // State properties
         count,

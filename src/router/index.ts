@@ -4,6 +4,9 @@ import AboutViewVue from '../shared/views/AboutView.vue'
 import { pokemonRoute } from '@/pokemons/router'
 import Counter1View from '@/counter/views/Counter1View.vue'
 import CounterSeptupViewVue from '@/counter/views/CounterSeptupView.vue'
+import ClientsLayoutVue from '@/clients/layout/ClientsLayout.vue'
+import ListClientViewVue from '@/clients/views/ListClientView.vue'
+import ClientViewVue from '@/clients/views/ClientView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +35,16 @@ const router = createRouter({
       path: '/counter',
       name: 'counter',
       component: () => import('../counter/views/CounterView.vue')
+    },
+    {
+      path: '/clients',
+      name: 'clients',
+      component: ClientsLayoutVue,
+      redirect: { name: 'list' },
+      children: [
+        { path: 'list', name: 'list', component: ListClientViewVue },
+        { path: '/clients/:id', name: 'client-id', component: ClientViewVue },
+      ]
     },
     {
       ...pokemonRoute,
