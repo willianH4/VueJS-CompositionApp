@@ -7,8 +7,11 @@ import { computed, watch } from 'vue';
 
 const getClients = async( page: number ):Promise<Client[]> => {
 
-    const { data } = await clientsApi.get<Client[]>(`/clients?_page=${ page }`);
+    // await new Promise(resolve => {
+    //     setTimeout(() => resolve(true), 3000)
+    // });
 
+    const { data } = await clientsApi.get<Client[]>(`/clients?_page=${ page }`);
     return data
 
 }
@@ -21,6 +24,10 @@ const useClients = () => {
     const { isLoading, data } = useQuery(
         ['clients?page=', currentPage],
         () => getClients(currentPage.value),
+        {
+            // Refres data in cache
+            // staleTime: 1000 * 60,
+        }
     )
 
     watch( data, clients =>  {
