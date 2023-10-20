@@ -29,7 +29,9 @@ const useClients = () => {
     
     return {
         isLoading,
-        clients
+        clients,
+        currentPage,
+        totalPages
     }
 
 }
