@@ -37,12 +37,13 @@
 import LoadingModal from '@/shared/components/LoadingModal.vue';
 import useClient from '../composables/useClient';
 import { useRoute } from 'vue-router';
-import { useMutation } from '@tanstack/vue-query';
+import { useMutation, useQueryClient } from '@tanstack/vue-query';
 import type { Client } from '@/data/intefaces/clients/Client';
 import clientsApi from '@/data/api/clientsApi';
 import { watch } from 'vue';
 
 const route = useRoute();
+const queryClient = useQueryClient();
 
 const { id } = route.params;
 const { client, isLoading } = useClient( Number(id) );
@@ -58,6 +59,9 @@ const updateClient = async( client: Client ):Promise<Client> => {
     })
 
     const { data } = await clientsApi.patch<Client>(`/clients/${ client.id }`, client);
+    const queries = queryClient.getQueryCache().findAll(['clients?page='], { exact: false });
+    queries.forEach( query => query.fetch() );
+
     return data;
 }
 
